@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
-use App\Http\Requests\UpdateArticlesRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +13,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Articles::with(['categorie', 'user'])->get();
+        $articles = Articles::with(['comments', 'tags'])->get();
         return Inertia::render('welcome', [
             'articles' => $articles,
         ]);

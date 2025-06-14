@@ -20,7 +20,7 @@ class Articles extends Model
     }
     public function comments()
     {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comments::class, 'article_id');
     }
     public function tags()
     {
