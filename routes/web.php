@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', [ArticlesController::class, 'index']);
+Route::get('/', [ArticlesController::class, 'index'])->name('home');
 Route::get('/article/create', [ArticlesController::class, 'create']);
 Route::post('/article/post', [ArticlesController::class, 'store']);
 Route::get('/article/{id}', [ArticlesController::class, 'show']);

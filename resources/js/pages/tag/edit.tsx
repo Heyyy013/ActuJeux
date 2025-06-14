@@ -10,8 +10,9 @@ const [values, setValues] = useState({
 
 const modifier = (e) => {
     e.preventDefault()
-    router.put(`/tag/update/${tag.id}`, values)
-    router.get('/')
+    router.put(`/tag/update/${tag.id}`, values, {
+        onSuccess: () => router.get('/')
+    })
 }
 
     return (
