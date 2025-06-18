@@ -26,9 +26,9 @@ export default function Create() {
                 <label>description</label>
                 <input type="text" onChange={(e) => setValues({ ...values, description: e.target.value })} />
                 <label>categorie_id</label>
-                <input type="text" onChange={(e) => setValues({ ...values, categorie_id: Number(e.target.value) })} />
+                <input type="number" onChange={(e) => setValues({ ...values, categorie_id: Number(e.target.value) })} />
                 <label>user_id</label>
-                <input type="text" onChange={(e) => setValues({ ...values, user_id: Number(e.target.value) })} />
+                <input type="number" onChange={(e) => setValues({ ...values, user_id: Number(e.target.value) })} />
 
                 <button type="submit">Ajouter</button>
             </form>

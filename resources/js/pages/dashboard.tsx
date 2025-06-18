@@ -1,35 +1,48 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
-import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Link, router } from "@inertiajs/react";
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-    },
-];
+export default function Dashboard({ tags, categories, roles, articles }) {
 
-export default function Dashboard() {
+    console.log(tags);
+
+    const supprimer = (e, item, id) => {
+        e.preventDefault()
+        router.delete(`${item}/${id}`, {
+            onSuccess: () => router.get('/dashboard')
+        })
+    }
+
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                </div>
-                <div className="relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                </div>
-            </div>
-        </AppLayout>
+        <div>
+            <h1 className="text-xl">Dashboard</h1>
+            <h1 className="text-lg">Articles</h1>
+            <ol className="list-decimal w-1/4 ml-6">
+                {articles.map((article) => (
+                    <li key={article.id}><p className="flex justify-between">{article.titre} <p className="w-1/2 flex justify-between"><button onClick={(e) => supprimer(e,'article', article.id)}>supprimer</button> <Link href={`/article/${article.id}/edit`}><button>modifier</button></Link></p></p></li>
+                ))}
+                <li><button> <Link href="/article/create">Ajouter</Link> </button></li>
+            </ol>
+            <h1 className="text-lg">Tags</h1>
+            <ol className="list-decimal w-1/4 ml-6">
+                {tags.map((tag) => (
+                    <li key={tag.id}><p className="flex justify-between">{tag.nom} <p className="w-1/2 flex justify-between"><button onClick={(e) => supprimer(e,'tag', tag.id)}>supprimer</button>  <Link href={`/tag/${tag.id}/edit`}><button>modifier</button></Link></p></p></li>
+                ))}
+                <li><button> <Link href="/tag/create">Ajouter</Link> </button></li>
+            </ol>
+            <h1 className="text-lg">Catégories</h1>
+            <ol className="list-decimal w-1/4 ml-6">
+                {categories.map((categorie) => (
+                    <li key={categorie.id}><p className="flex justify-between">{categorie.nom} <p className="w-1/2 flex justify-between"><button onClick={(e) => supprimer(e,'cat', categorie.id)}>supprimer</button> <Link href={`/categorie/${categorie.id}/edit`}><button>modifier</button></Link></p></p></li>
+                ))}
+                <li><button> <Link href="/tag/create">Ajouter</Link> </button></li>
+            </ol>
+            <h1 className="text-lg">Roles</h1>
+            <ol className="list-decimal w-1/4 ml-6">
+                {roles.map((role) => (
+                    <li key={role.id}><p className="flex justify-between">{role.nom} <p className="w-1/2 flex justify-between"><button onClick={(e) => supprimer(e,'role', role.id)}>supprimer</button> <Link href={`/role/${role.id}/edit`}><button>modifier</button></Link></p></p></li>
+                ))}
+                <li><button> <Link href="/tag/create">Ajouter</Link> </button></li>
+            </ol>
+            
+        </div>
     );
 }

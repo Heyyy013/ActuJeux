@@ -24,5 +24,15 @@ class TagsSeeder extends Seeder
                 'nom' => 'plateforme'
             ],
         ]);
+        DB::table('articles_tags')->insert([
+            [
+                'articles_id' => 1,
+                'tags_id' => 1,
+            ],
+            [
+                'articles_id' => 1,
+                'tags_id' => 2,
+            ],
+        ]);
     }
 }

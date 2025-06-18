@@ -24,8 +24,8 @@ const modifier = (e) => {
                 <input type="text" value={values.titre} onChange={(e) => setValues({...values, titre: e.target.value})} />
                 <label>description</label>
                 <input type="text" value={values.description} onChange={(e) => setValues({...values, description: e.target.value})}/>
-                <label>date de Début</label>
-                <input type="text" value={values.categorie_id} onChange={(e) => setValues({...values, categorie_id: e.target.value})}/>
+                <label>categorie_id</label>
+                <input type="number" value={values.categorie_id} onChange={(e) => setValues({...values, categorie_id: e.target.value})}/>
 
                 <button type="submit">Modifier</button>
             </form>

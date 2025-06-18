@@ -15,13 +15,13 @@ class CategoriesSeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'nom' => 'jeuxPC'
+                'nom' => 'Jeux PC'
             ],
             [
-                'nom' => 'jeuxConsole'
+                'nom' => 'Jeux console'
             ],
             [
-                'nom' => 'jeuxAVenir'
+                'nom' => 'Jeux à venir'
             ],
         ]);
     }

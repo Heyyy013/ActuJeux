@@ -13,7 +13,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Articles::with(['comments', 'tags'])->get();
+        $articles = Articles::with(['comments', 'tags', 'categories'])->get();
         return Inertia::render('welcome', [
             'articles' => $articles,
         ]);
@@ -46,8 +46,8 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        $article = Articles::find($id);
-        return Inertia::render('/article/{id}', ['article' => $article]);
+        $article = Articles::with(['tags', 'comments'])->find($id);
+        return Inertia::render('article/detail', ['article' => $article]);
     }
 
     /**

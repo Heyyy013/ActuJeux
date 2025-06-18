@@ -44,8 +44,6 @@ class TagsController extends Controller
      */
     public function show($id)
     {
-        $tag = Tags::find($id);
-        return Inertia::render('/tag/{id}', ['tag' => $tag]);
     }
 
     /**

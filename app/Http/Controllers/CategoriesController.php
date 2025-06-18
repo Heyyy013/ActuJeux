@@ -42,8 +42,6 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $categorie = Categories::find($id);
-        return Inertia::render('/categorie/{id}', ['categorie' => $categorie]);
     }
 
     /**
