@@ -15,7 +15,7 @@ class ArticlesSeeder extends Seeder
     {
         DB::table('articles')->insert([
             [
-                'titre' => 'GTA 6 : Le Retour Triomphal de Rockstar dans un Monde Plus Grand et Plus Ambitieux',
+                'titre' => 'GTA 6 : Le Retour Triomphal de Rockstar',
                 'description' => "Après plus d'une décennie d'attente, Grand Theft Auto VI est enfin en route. Annoncé officiellement par Rockstar Games, le jeu sortira au printemps 2026 (probablement en mai), d'abord sur PlayStation 5 et Xbox Series X|S. La version PC reste à confirmer.
 
 Ce nouvel opus marquera un retour à Vice City, dans un État fictif nommé Leonida, inspiré de la Floride. La carte sera immense, avec des zones urbaines, rurales, marécageuses, et même sous-marines. L’univers promet d’être le plus vivant et détaillé jamais conçu par Rockstar.
@@ -27,7 +27,7 @@ Le jeu bénéficiera de nombreuses améliorations techniques : une IA dynamique,
 Malgré les fuites et les changements internes chez Rockstar, GTA 6 s’annonce comme le jeu le plus ambitieux de la saga, et probablement l’un des plus attendus de l’histoire du jeu vidéo.",
                 'categorie_id' => 3,
                 'user_id' => 3,
-                'img' => '/images/imgGTA6.jpg',
+                'img' => '/images/gta6.webp',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

@@ -2,20 +2,26 @@ import { Link, router, usePage } from "@inertiajs/react";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/fr';
+import Navbar from "@/components/navbar/Navbar";
 
 dayjs.extend(relativeTime);
 dayjs.locale('fr');
 
 
 export default function Welcome({ articles }) {
-    const { auth } = usePage().props;
 
     console.log(articles);
 
     return (
         <div>
-            <section>
-                <div className="flex flex-col-reverse h-screen">
+            <Navbar/>
+            <section id="about">
+                <div style={{ backgroundImage: "url('/images/bgAbout.jpg')" }} className="w-full h-screen text-white bg-cover flex items-center">
+                    <p className="text-white w-1/2 mx-auto text-center font-bold text-3xl h-1/2 leading-relaxed">Bienvenue sur <span className="text-lime-300">GamePulse</span> , votre nouvelle source d’actualités dédiée à l’univers des jeux vidéo !
+
+                        Notre mission est simple : vous tenir informé(e) des prochaines sorties, des tendances du moment, et des annonces majeures dans le monde du <span className="text-fuchsia-400">gaming</span>. </p>
+                </div>
+                <div className="flex flex-col-reverse h-screen" id="articles">
 
                     {articles.map((article, index) => (
                         <div key={index} className="w-1/2 mx-auto mb-auto mt-10 overflow-hidden rounded-2xl shadow-xl">
