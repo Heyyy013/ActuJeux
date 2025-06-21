@@ -31,7 +31,9 @@ class ArticlesController extends Controller
     public function create()
     {
         $articles = Articles::all();
-        return Inertia::render('article/create', ['articles' => $articles]);
+        $categories = Categories::all();
+        $tags = Tags::all();
+        return Inertia::render('article/create', ['articles' => $articles, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -45,6 +47,7 @@ class ArticlesController extends Controller
         $article->categorie_id = $request->categorie_id;
         $article->user_id = $request->user_id;
         $article->save();
+        // $article->tags()->attach($request->tags);
     }
 
     /**
@@ -61,8 +64,10 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        $article = Articles::find($id);
-        return Inertia::render('article/edit', ['article' => $article]);
+        $article = Articles::with(['categories'])->find($id);
+        $categories = Categories::all();
+        $tags = Tags::all();
+        return Inertia::render('article/edit', ['article' => $article, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**

@@ -19,7 +19,8 @@ export default function Welcome({ articles, categories, tags }) {
         article.tags.some(tag => tag.nom.toLowerCase().includes(search.toLowerCase()))
     ) &&
         (
-            filtre === '' || article.categories.nom.toLowerCase() === filtre.toLowerCase()
+            filtre === '' || article.categories.nom.toLowerCase() === filtre.toLowerCase() ||
+            article.tags.some(tag => tag.nom.toLowerCase().includes(filtre.toLowerCase()))
         )
     )
 
@@ -52,12 +53,12 @@ export default function Welcome({ articles, categories, tags }) {
                 </div>
 
 
-                <div className="flex flex-col-reverse h-screen" id="articles">
+                <div className="flex flex-col-reverse" id="articles">
 
 
                     {filteredArticles.map((article, index) => (
-                        <Link key={index} href={`/article/${article.id}`}>
-                            <div  className="flex w-3/4 mx-auto my-8 rounded-2xl shadow-xl overflow-hidden bg-white">
+                        <div key={index} className="w-3/4 mx-auto my-8 rounded-2xl shadow-xl overflow-hidden bg-white">
+                            <Link href={`/article/${article.id}`} className="flex">
                                 <img src={article.img} alt="" className="w-1/3 object-cover" />
 
 
@@ -75,8 +76,8 @@ export default function Welcome({ articles, categories, tags }) {
                                         ))}
                                     </div>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
 
                     ))}
                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminPass;
 use App\Http\Middleware\AuthorPass;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,9 @@ Route::middleware([AdminPass::class])->group(function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+
+    Route::get('/user/{id}/edit', [UserController::class, 'edit']);
+    Route::put('/user/update/{id}', [UserController::class, 'update']);
 
     Route::get('/tag/create', [TagsController::class, 'create']);
     Route::get('/tag/{id}', [TagsController::class, 'show']);
