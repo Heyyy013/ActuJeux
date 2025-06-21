@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\Categories;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,9 +15,13 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Articles::with(['comments', 'tags', 'categories'])->get();
+        $categories = Categories::all();
+        $tags = Tags::all();
+        $articles = Articles::with(['tags', 'categories'])->get();
         return Inertia::render('welcome', [
             'articles' => $articles,
+            'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -46,7 +52,7 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        $article = Articles::with(['tags', 'comments'])->find($id);
+        $article = Articles::with(['tags', 'comments.user'])->find($id);
         return Inertia::render('article/detail', ['article' => $article]);
     }
 

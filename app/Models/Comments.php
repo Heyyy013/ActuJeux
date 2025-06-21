@@ -12,10 +12,10 @@ class Comments extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
-    public function comments()
+    public function articles()
     {
-        return $this->hasMany(Comments::class, 'article_id');
+        return $this->belongsTo(Articles::class, 'article_id');
     }
 }

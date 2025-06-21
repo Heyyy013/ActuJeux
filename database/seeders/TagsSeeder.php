@@ -33,6 +33,10 @@ class TagsSeeder extends Seeder
                 'articles_id' => 1,
                 'tags_id' => 2,
             ],
+            [
+                'articles_id' => 2,
+                'tags_id' => 1,
+            ],
         ]);
     }
 }

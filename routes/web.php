@@ -56,12 +56,13 @@ Route::middleware([AdminPass::class])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // ROUTE POUR LECTEUR
-    Route::get('/comment/create', [CommentsController::class, 'create']);
+    // Route::get('/comment/create', [CommentsController::class, 'create']);
     Route::post('/comment/post', [CommentsController::class, 'store']);
-    Route::get('/comment/{id}', [CommentsController::class, 'show']);
     Route::get('/comment/{id}/edit', [CommentsController::class, 'edit']);
     Route::put('/comment/update/{id}', [CommentsController::class, 'update']);
     Route::delete('/comment/{id}', [CommentsController::class, 'destroy']);
+    // Route::get('/comment/{id}', [CommentsController::class, 'show']);
+
 
     Route::get('/article/{id}', [ArticlesController::class, 'show']);
 });

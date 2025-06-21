@@ -23,8 +23,6 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        $comments = Comments::all();
-        return Inertia::render('comment/create', ['comments' => $comments]);
     }
 
     /**
@@ -33,8 +31,9 @@ class CommentsController extends Controller
     public function store(Request $request)
     {
         $comment = new Comments();
-        $comment->description = $request->description;
+        $comment->contenu = $request->contenu;
         $comment->article_id = $request->article_id;
+        $comment->user_id = auth()->id();
         $comment->save();
     }
 
@@ -43,8 +42,6 @@ class CommentsController extends Controller
      */
     public function show($id)
     {
-        $comment = Comments::find($id);
-        return Inertia::render('/comment/{id}', ['comment' => $comment]);
     }
 
     /**
@@ -64,8 +61,9 @@ class CommentsController extends Controller
     public function update(Request $request, $id)
     {
         $comment = Comments::find($id);
-        $comment->description = $request->description;
+        $comment->contenu = $request->contenu;
         $comment->article_id = $request->article_id;
+        $comment->user_id = auth()->id();
         $comment->save();
     }
 
