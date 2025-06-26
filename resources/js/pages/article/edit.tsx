@@ -6,9 +6,7 @@ export default function Edit({ article, categories, tags }) {
     const [values, setValues] = useState({
         titre: article.titre,
         description: article.description,
-        categorie_id: article.categorie_id,
-        
-        user_id: article.user_id,
+        categorie_id: article.categorie_id,        
     })
 
     console.log(article);
@@ -23,12 +21,12 @@ export default function Edit({ article, categories, tags }) {
 
     return (
         <div>
-            <form onSubmit={modifier}>
+            <form onSubmit={modifier} className="flex items-center">
                 <label>Titre</label>
                 <input type="text" value={values.titre} onChange={(e) => setValues({ ...values, titre: e.target.value })} />
                 <label>description</label>
-                <input type="text" value={values.description} onChange={(e) => setValues({ ...values, description: e.target.value })} />
-                <label>categorie_id</label>
+                <textarea value={values.description} className="w-1/2 h-auto" onChange={(e) => setValues({ ...values, description: e.target.value })} />
+                <label>categorie</label>
                 <select defaultValue={values.categorie_id} onChange={(e) => setValues({ ...values, categorie_id: Number(e.target.value) })}>
                     <option value={values.categorie_id} >{article.categories.nom}</option>
                     {categories.map((categorie) =>

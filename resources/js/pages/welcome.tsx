@@ -53,11 +53,12 @@ export default function Welcome({ articles, categories, tags }) {
                 </div>
 
 
-                <div className="flex flex-col-reverse" id="articles">
+
+                <div className="flex flex-col-reverse min-h-screen" id="articles">
 
 
                     {filteredArticles.map((article, index) => (
-                        <div key={index} className="w-3/4 mx-auto my-8 rounded-2xl shadow-xl overflow-hidden bg-white">
+                        <div key={index} className="w-3/4 mb-auto mx-auto my-8 rounded-2xl shadow-xl overflow-hidden bg-white">
                             <Link href={`/article/${article.id}`} className="flex">
                                 <img src={article.img} alt="" className="w-1/3 object-cover" />
 
@@ -81,6 +82,7 @@ export default function Welcome({ articles, categories, tags }) {
 
                     ))}
                 </div>
+
             </section>
         </div>
     );

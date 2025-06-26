@@ -1,13 +1,14 @@
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { useState } from "react";
 
 export default function Create({ categories, tags }) {
+    const { auth } = usePage().props
     const [values, setValues] = useState({
         titre: '',
         description: '',
         categorie_id: 0,
-        tags_id: [0],
-        user_id: 0,
+        tags_id: [],
+        user_id: auth.user.id,
     })
 
 
@@ -18,21 +19,14 @@ export default function Create({ categories, tags }) {
         });
     }
 
-    // const checkTag = (e) => {
-    //     const tagId = Number(e.target.value)
-    //     if (!values.tags_id.includes(tagId)) {
-    //         setValues({...values, tags_id: [...values.tags_id, tagId]})
-    //     }
-    // }
-
 
     return (
         <div>
-            <form onSubmit={ajouter}>
+            <form onSubmit={ajouter} className="flex items-center">
                 <label>titre</label>
                 <input type="text" onChange={(e) => setValues({ ...values, titre: e.target.value })} />
                 <label>description</label>
-                <input type="text" onChange={(e) => setValues({ ...values, description: e.target.value })} />
+                <textarea className="w-1/2" onChange={(e) => setValues({ ...values, description: e.target.value })} />
                 <label>categorie</label>
                 <select defaultValue={''} onChange={(e) => setValues({ ...values, categorie_id: Number(e.target.value) })}>
                     <option value="" disabled>Choisir une catégorie</option>
@@ -42,22 +36,27 @@ export default function Create({ categories, tags }) {
                     ))}
                 </select>
                 <label>Tag(s)</label>
-                {/* <select defaultValue={[]} onChange={(e) => setValues({ ...values, tags_id:[...values.tags_id,  Number(e.target.value)] })}>
-                    <option value={[]} disabled>Choisir un ou plusieurs tag(s)</option>
-                    {tags.map((tag) => (
-                        <option id="" value={tag.id}>{tag.nom}</option>
 
-                    ))}
-                </select> */}
-                {/* {tags.map((tag) => (
+                {tags.map((tag) => (
                     <div key={tag.id}>
-
                         <label>{tag.nom}</label>
-                        <input type="checkbox" value={tag.id} onChange={(e) => {checkTag(e)}} />
+                        <input
+                            type="checkbox"
+                            value={tag.id}
+                            onChange={(e) => {
+                                const id = Number(e.target.value);
+                                const checked = e.target.checked;
+
+                                if (checked) {
+                                    setValues({ ...values, tags_id: [...values.tags_id, id] });
+                                } else {
+                                    setValues({ ...values, tags_id: values.tags_id.filter(tag => tag !== id) });
+                                }
+                            }}
+                        />
                     </div>
-                ))} */}
-                <label>user_id</label>
-                <input type="number" onChange={(e) => setValues({ ...values, user_id: Number(e.target.value) })} />
+                ))}
+
 
                 <button type="submit">Ajouter</button>
             </form>

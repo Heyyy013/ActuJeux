@@ -47,7 +47,9 @@ class ArticlesController extends Controller
         $article->categorie_id = $request->categorie_id;
         $article->user_id = $request->user_id;
         $article->save();
-        // $article->tags()->attach($request->tags);
+        if ($request->has('tags_id')) {
+            $article->tags()->attach($request->tags_id);
+        }
     }
 
     /**
@@ -89,6 +91,9 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         $article = Articles::find($id);
+        if ($article->tags) {
+            $article->tags()->detach();
+        }
         $article->delete();
     }
 }
