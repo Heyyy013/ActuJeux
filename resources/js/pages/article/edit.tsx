@@ -6,10 +6,12 @@ export default function Edit({ article, categories, tags }) {
     const [values, setValues] = useState({
         titre: article.titre,
         description: article.description,
-        categorie_id: article.categorie_id,        
+        categorie_id: article.categorie_id,
+        user_id: article.user_id,
+        tags_id: article.tags.map(tag => tag.id),      
     })
 
-    console.log(article);
+    console.log(values.tags_id);
 
 
     const modifier = (e) => {
@@ -43,6 +45,27 @@ export default function Edit({ article, categories, tags }) {
                         )
                     )}
                 </select>
+                {tags.map((tag) => (
+                    <div key={tag.id}>
+                        <label>{tag.nom}</label>
+                        <input
+                            type="checkbox"
+                            value={tag.id}
+                            checked={values.tags_id.includes(tag.id)}
+
+                            onChange={(e) => {
+                                const id = Number(e.target.value);
+                                const checked = e.target.checked;
+
+                                if (checked) {
+                                    setValues({ ...values, tags_id: [...values.tags_id, id] });
+                                } else {
+                                    setValues({ ...values, tags_id: values.tags_id.filter(tag => tag !== id) });
+                                }
+                            }}
+                        />
+                    </div>
+                ))}
                 <button type="submit">Modifier</button>
             </form>
         </div>

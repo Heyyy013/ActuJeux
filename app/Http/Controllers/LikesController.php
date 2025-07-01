@@ -5,12 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Likes;
 use App\Http\Requests\StoreLikesRequest;
 use App\Http\Requests\UpdateLikesRequest;
+use App\Models\Articles;
+use Illuminate\Http\Request;
 
 class LikesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    public function toggle(Request $request)
+    {
+        $article = Articles::findOrFail($request->article_id);
+        $user = auth()->user();
+
+        if ($article->likedByUsers()->where('user_id', $user->id)->exists()) {
+            $article->likedByUsers()->detach($user->id);
+        } else {
+            $article->likedByUsers()->attach($user->id);
+        }
+
+        return back();
+    }
+
     public function index()
     {
         //

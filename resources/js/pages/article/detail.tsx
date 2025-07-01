@@ -4,12 +4,16 @@ import { SlGameController } from "react-icons/sl";
 import Navbar from "@/components/navbar/Navbar";
 
 export default function Detail({ article }) {
-    console.log(article);
-
     const [values, setValues] = useState({
         contenu: '',
         article_id: article.id,
     });
+
+    const toggleLike = (id) => {
+        router.post('/like', { article_id: id }, {
+
+        });
+    };
 
     const change = (e) => {
         setValues({
@@ -20,73 +24,78 @@ export default function Detail({ article }) {
 
     const submit = (e) => {
         e.preventDefault();
-        router.post('/comment/post', values)
+        router.post('/comment/post', values);
     };
-
-    // const [values, setValues] = useState({
-    //     contenu: '',
-    // })
-
-
-    // const ajouter = (e) => {
-    //     e.preventDefault()
-    //     router.post('/article/post', values, {
-    //         onSuccess: () => router.get('/'),
-    //         onError: (errors) => console.log(errors)
-    //     });
-    // }
-
 
     return (
         <div>
             <Navbar />
-            <section className="pb-20 pt-20">
-                <div className="w-4/5 mx-auto border-2xl rounded-2xl h-8/10">
+            <section className="pt-24 pb-20 px-4 md:px-8">
+                <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-10">
 
-                    <h1 className="mx-auto text-center pt-10 mb-5 text-4xl w-1/2 text-blue-400" style={{
-                        fontFamily: "'Black Ops One', sans-serif",
-                    }}>{article.titre}</h1>
-                    <img src={article.img} alt="" className="w-150 mx-auto mb-5 rounded-md shadow-2xl" />
-                    <div className="flex justify-between w-1/2 mx-auto gap-2 flex-wrap">
-                        <div >
+                    {/* Titre */}
+                    <h1 className="text-center text-2xl md:text-4xl font-bold text-blue-400 mb-6"
+                        style={{ fontFamily: "'Black Ops One', sans-serif" }}>
+                        {article.titre}
+                    </h1>
 
+                    {/* Image - taille conservée sur laptop */}
+                    <img
+                        src={article.img}
+                        alt={article.titre}
+                        className="w-full md:w-[600px] mx-auto mb-6 rounded-md shadow-2xl"
+                    />
 
+                    {/* Tags + Like */}
+                    <div className="flex flex-col md:flex-row justify-between gap-6 md:items-center mb-6">
+                        <div className="flex flex-wrap gap-2">
                             {article.tags.map((tag, index) => (
-                                <div key={index} className="flex items-center gap-2 text-lg">
-
-                                    <SlGameController className="text-violet-800 font-extrabold" /><p key={index} className="font-extrabold text-violet-800 w-1/2 py-1.5 text-center">{tag.nom}</p>
+                                <div key={index} className="flex items-center gap-1 text-sm md:text-lg">
+                                    <SlGameController className="text-violet-800" />
+                                    <span className="font-bold text-violet-800">{tag.nom}</span>
                                 </div>
                             ))}
                         </div>
-                        <div>
-                            like
-                        </div>
+                        {/* <button onClick={() => toggleLike(article.id)}>
+                            ❤️ {article.likes && article.likes.length > 0 && (
+                                <p>{article.likes.length} likes</p>
+                            )}
+                        </button> */}
                     </div>
-                    <p className="w-3/4 mx-auto text-lg mt-15 pb-10">{article.description}</p>
 
-                    {article.comments.map((comment, index) => (
-                        <div key={index}>
-                            <p className="">{comment.user.name}</p>
-                            <p className="pl-5">{comment.contenu}</p>
-                        </div>
-                    ))}
+                    {/* Description */}
+                    <p className="text-base md:text-lg text-gray-700 mb-10">
+                        {article.description}
+                    </p>
+
+                    {/* Commentaires */}
+                    <div className="mb-8 space-y-4">
+                        {article.comments.map((comment, index) => (
+                            <div key={index} className="bg-gray-100 p-4 rounded-md shadow">
+                                <p className="font-bold text-gray-800">{comment.user.name}</p>
+                                <p className="pl-2 text-gray-600">{comment.contenu}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Formulaire de commentaire */}
                     <form onSubmit={submit} className="space-y-4">
                         <textarea
                             name="contenu"
                             value={values.contenu}
                             onChange={change}
                             placeholder="Écrire un commentaire..."
-                            className="w-full p-2 border rounded"
+                            className="w-full p-3 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
                         ></textarea>
 
-                        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+                        <button
+                            type="submit"
+                            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+                        >
                             Envoyer
                         </button>
                     </form>
-
                 </div>
-
-
             </section>
         </div>
     );

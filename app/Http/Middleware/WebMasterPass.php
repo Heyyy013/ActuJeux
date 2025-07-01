@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminPass
+class WebMasterPass
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class AdminPass
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user() || $request->user()->role_id >= 2) {
+        if (!$request->user() || $request->user()->role_id >= 3) {
             return redirect('/');
         }
         return $next($request);

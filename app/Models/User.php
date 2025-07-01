@@ -46,16 +46,24 @@ class User extends Authenticatable
         ];
     }
 
-    public function articles() {
+    public function articles()
+    {
         return $this->hasMany(Articles::class);
     }
-    public function likes() {
+    public function likes()
+    {
         return $this->hasMany(Likes::class);
     }
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsTo(Roles::class, 'role_id');
     }
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comments::class);
     }
+    // public function likedArticles()
+    // {
+    //     return $this->belongsToMany(Articles::class, 'likes');
+    // }
 }

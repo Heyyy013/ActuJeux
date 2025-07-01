@@ -10,9 +10,9 @@ class Likes extends Model
     /** @use HasFactory<\Database\Factories\LikesFactory> */
     use HasFactory;
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+//     public function article()
+// {
+//     return $this->belongsTo(Articles::class);
+// }
 
 }
