@@ -27,7 +27,6 @@ export default function Welcome({ articles, categories, tags }) {
         <div>
             <Navbar />
             <section id="about">
-                {/* Section d'intro */}
                 <div
                     style={{ backgroundImage: "url('/images/bgAbout.jpg')" }}
                     className="w-full min-h-screen text-white bg-cover bg-center flex items-center px-4"
