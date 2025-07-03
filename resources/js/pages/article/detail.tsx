@@ -9,9 +9,14 @@ export default function Detail({ article }) {
         article_id: article.id,
     });
 
-    const toggleLike = (id) => {
-        router.post('/like', { article_id: id }, {
+    console.log(article);
 
+
+    const toggleLike = (e) => {
+        e.preventDefault()
+        
+        router.post(`/like/${article.id}`, {}, {
+            preserveScroll: true,
         });
     };
 
@@ -47,7 +52,7 @@ export default function Detail({ article }) {
                     />
 
                     {/* Tags + Like */}
-                    <div className="flex flex-col md:flex-row justify-between gap-6 md:items-center mb-6">
+                    <div className="flex lg:w-1/2 lg:mx-auto justify-between gap-6 md:items-center mb-6">
                         <div className="flex flex-wrap gap-2">
                             {article.tags.map((tag, index) => (
                                 <div key={index} className="flex items-center gap-1 text-sm md:text-lg">
@@ -56,11 +61,15 @@ export default function Detail({ article }) {
                                 </div>
                             ))}
                         </div>
-                        {/* <button onClick={() => toggleLike(article.id)}>
-                            ❤️ {article.likes && article.likes.length > 0 && (
-                                <p>{article.likes.length} likes</p>
+                        <button onClick={(e) => toggleLike(e)} className="text-xl">
+                            {article.liked_by && article.liked_by.length > 0 ? (
+                                <i className="bi bi-heart-fill text-red-500 pr-1"></i>
+                            ) : (
+                                <i className="bi bi-heart text-red-500 pr-1"></i>
                             )}
-                        </button> */}
+                            {article.liked_by.length}
+
+                        </button>
                     </div>
 
                     {/* Description */}

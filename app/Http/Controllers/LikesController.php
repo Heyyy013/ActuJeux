@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLikesRequest;
 use App\Http\Requests\UpdateLikesRequest;
 use App\Models\Articles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikesController extends Controller
 {
@@ -14,19 +15,19 @@ class LikesController extends Controller
      * Display a listing of the resource.
      */
 
-    public function toggle(Request $request)
-    {
-        $article = Articles::findOrFail($request->article_id);
-        $user = auth()->user();
+    public function toggle($id)
+{
+    $article = Articles::findOrFail($id);
+    $user = Auth::user();
 
-        if ($article->likedByUsers()->where('user_id', $user->id)->exists()) {
-            $article->likedByUsers()->detach($user->id);
-        } else {
-            $article->likedByUsers()->attach($user->id);
-        }
-
-        return back();
+    if ($article->likedBy()->where('user_id', $user->id)->exists()) {
+        $article->likedBy()->detach($user->id);
+    } else {
+        $article->likedBy()->attach($user->id);
     }
+
+    return back(); // ou return redirect()->back(); ou Inertia::redirect...
+}
 
     public function index()
     {

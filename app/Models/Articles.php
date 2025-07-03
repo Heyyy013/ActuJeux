@@ -26,8 +26,9 @@ class Articles extends Model
     {
         return $this->belongsToMany(Tags::class, 'articles_tags');
     }
-    // public function likedByUsers()
-    // {
-    //     return $this->belongsToMany(User::class, 'likes');
-    // }
+    public function likedBy()
+{
+    return $this->belongsToMany(User::class, 'likes', 'article_id', 'user_id');
+}
+
 }

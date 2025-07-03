@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Categories;
 use App\Models\Tags;
 use Illuminate\Http\Request;
@@ -57,8 +59,15 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        $article = Articles::with(['tags', 'comments.user'])->find($id);
-        return Inertia::render('article/detail', ['article' => $article]);
+        $article = Articles::with(['tags', 'comments.user', 'likedBy'])->findOrFail($id);
+
+        // Vérifie si l'utilisateur connecté a liké l'article
+        $liked = Auth::check() ? $article->likedBy->contains(Auth::id()) : false;
+
+        return Inertia::render('article/detail', [
+            'article' => $article,
+            'liked' => $liked,
+        ]);
     }
 
     /**

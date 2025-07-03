@@ -70,7 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/comment/{id}', [CommentsController::class, 'destroy']);
     // Route::get('/comment/{id}', [CommentsController::class, 'show']);
 
-    Route::post('/like', [LikesController::class, 'toggle'])->middleware('auth');
+    Route::post('/like/{id}', [LikesController::class, 'toggle']);
 
 
 
