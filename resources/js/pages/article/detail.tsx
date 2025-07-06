@@ -14,7 +14,7 @@ export default function Detail({ article }) {
 
     const toggleLike = (e) => {
         e.preventDefault()
-        
+
         router.post(`/like/${article.id}`, {}, {
             preserveScroll: true,
         });
@@ -61,13 +61,25 @@ export default function Detail({ article }) {
                                 </div>
                             ))}
                         </div>
-                        <button onClick={(e) => toggleLike(e)} className="text-xl">
+                        <button onClick={(e) => toggleLike(e)} className="text-xl cursor-pointer">
                             {article.liked_by && article.liked_by.length > 0 ? (
                                 <i className="bi bi-heart-fill text-red-500 pr-1"></i>
                             ) : (
-                                <i className="bi bi-heart text-red-500 pr-1"></i>
+                                <i className="bi hover:bi-heart-fill bi-heart text-red-500 pr-1 "></i>
                             )}
-                            {article.liked_by.length}
+                            {
+                                article.liked_by.length >= 1000 ?
+                                    <span>
+
+                                        {Math.floor(article.liked_by.length / 1000)}k
+                                    </span>
+                                    : (
+                                        <span>
+
+                                            {article.liked_by.length}
+                                        </span>
+                                    )
+                            }
 
                         </button>
                     </div>
