@@ -16,6 +16,7 @@ export default function Dashboard({ tags, categories, roles, articles, users }) 
 
     return (
         <div>
+            <Link href="/" className="flex justify-center text-xl">Retour Accueil</Link>
 
             <div className="container flex justify-evenly w-9/10 mx-auto flex-wrap pt-10">
                 {auth.user.role_id == 1 && (

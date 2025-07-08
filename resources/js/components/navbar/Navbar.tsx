@@ -29,6 +29,10 @@ export default function Navbar() {
 
                 {/* Connexion / Déconnexion */}
                 <div className="hidden md:flex items-center">
+                    { auth.user && auth.user.id <=3 &&
+
+                    <Link href="/dashboard">Dashboard</Link>
+                    }
                     {!auth.user ? (
                         <Link href="/login">
                             <img src="/images/connexion.png" className="w-[60px]" alt="Connexion" />

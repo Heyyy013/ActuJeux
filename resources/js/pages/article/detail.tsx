@@ -4,12 +4,15 @@ import { SlGameController } from "react-icons/sl";
 import Navbar from "@/components/navbar/Navbar";
 
 export default function Detail({ article }) {
+    const { auth } = usePage().props
     const [values, setValues] = useState({
         contenu: '',
         article_id: article.id,
     });
 
-    console.log(article);
+    console.log(article.liked_by);
+    console.log(auth.user.id);
+    console.log(article.liked_by.includes(auth.user.id));
 
 
     const toggleLike = (e) => {
@@ -62,7 +65,7 @@ export default function Detail({ article }) {
                             ))}
                         </div>
                         <button onClick={(e) => toggleLike(e)} className="text-xl cursor-pointer">
-                            {article.liked_by && article.liked_by.length > 0 ? (
+                            {article.liked_by.some(array => array.id == auth.user.id) ? (
                                 <i className="bi bi-heart-fill text-red-500 pr-1"></i>
                             ) : (
                                 <i className="bi hover:bi-heart-fill bi-heart text-red-500 pr-1 "></i>
